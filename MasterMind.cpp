@@ -44,11 +44,12 @@ void saisie_code(std::string &code, std::string j1, rangee r)
 
 int main()
 {
-    rangee r;
+    rangee r; int nb_tentatives, nb_couleurs;
+    init_jeu(r,nb_tentatives,nb_couleurs);
     init_tab(r);
     std::string j1, j2;
     saisie_joueurs(j1,j2);
     std::string code;
-    saisie_code(code,j1);
+    saisie_code(code,j1,r);
     return 0;
 }
