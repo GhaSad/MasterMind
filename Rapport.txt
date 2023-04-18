@@ -1,0 +1,12 @@
+-) La bibliothèque conio.h sera utilisée dans la procédure "saisie_code"
+
+-) On a définie une structure de donnée "rangée" contenant un tableau et un entier représentant sa taille
+
+-) Une procédure init_jeu qui permet de saisir le nombre de tentatives, le nombre de couleur, ainsi que la taille de la rangée
+
+-) Une procédure init_tab qui remet les valeurs du tableau à la chaine vide
+
+-) Une procédure saisie_joueurs qui permet de saisir le pseudo des deux joueurs, le j1 étant le premier à saisir le code
+
+-) Une procédure saisie_code : ~) La boucle while s'arrete dès que la taille du code est égale à la taille des rangées
+					 ~) La fonction getch() permet de ne pas afficher la saisie dans la console, et donc le code est caché
