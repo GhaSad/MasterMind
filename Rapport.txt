@@ -10,3 +10,12 @@
 
 -) Une procédure saisie_code : ~) La boucle while s'arrete dès que la taille du code est égale à la taille des rangées
 					 ~) La fonction getch() permet de ne pas afficher la saisie dans la console, et donc le code est caché
+
+-) Une fonction booléenne verif qui vérifie si la réponse saisie est égale au code secret
+
+-) La procédure jeu qui permet de lancer le jeu : 
+	~) La boucle while s'arrete des que le compteur "tour" est strictement supérieur au nombre de tentatives imposé
+	~) Le deuxieme joueur saisie la réponse
+	~) La procédure s'arrete si la fonction verif envoie "true", et affiche le vainqueur
+	~) Si la reponse est incorrecte, le premier joueur saisie l'indice qui permet d'indiquer au deuxieme joueur ses fautes
+	~) Quand on sort de la boucle while, cela signifie que le nombre de tentatives maximum est atteint, et donc le deuxieme joueur a perdu
