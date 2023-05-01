@@ -2,7 +2,7 @@
 
 -) On a définie une structure de donnée "rangée" contenant un tableau et un entier représentant sa taille
 
--) Une procédure init_jeu qui permet de saisir le nombre de tentatives, le nombre de couleur, ainsi que la taille de la rangée
+-) Une procédure init_jeu qui permet de saisir le nombre de tentatives, le nombre de couleur, ainsi que la taille de la rangée, qui affiche aussi les couleurs pouvant être séléctionnées
 
 -) Une procédure init_tab qui remet les valeurs du tableau à la chaine vide
 
