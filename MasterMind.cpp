@@ -19,8 +19,8 @@ void init_jeu(int &nb_tentatives, int &nb_couleurs, int &nb_manches)
     {
         std::cout<<"Le jeu se deroule entre deux joueurs : "<<std::endl;
         std::cout<<"Le premier decide du code couleur secret "<<std::endl;
-        std::cout<<"Et le deuxieme possede d'un nombre de tentatives choisis pour deviner l'ordre des couleurs "<<std::endl;
-        std::cout<<"Apres la saisie de la reponse, le premier joueur donne un indice qui indique le nombre de couleurs corrects ainsi que leur ordre "<<std::endl;
+        std::cout<<"Et le deuxieme possede un nombre de tentatives choisis pour deviner l'ordre des couleurs "<<std::endl;
+        std::cout<<"Apres la saisie de la reponse, le premier joueur donne un indice qui indique le nombre de couleurs correctes ainsi que leurs ordres "<<std::endl;
         std::cout<<"Vous pouvez choisir le nombre de manches a jouer, ainsi que la difficulte "<<std::endl;
         std::cout<<"Facile -> 2 couleurs "<<std::endl;
         std::cout<<"Moyen -> 3 couleurs "<<std::endl;
@@ -33,12 +33,22 @@ void init_jeu(int &nb_tentatives, int &nb_couleurs, int &nb_manches)
     char difficulte;
     std::cout<<"Quelle difficulte ? (facile(f),moyen(m),difficile(d)) "; std::cin>>difficulte;
     if(difficulte=='f')
-        nb_couleurs==2;
+        nb_couleurs=2;
     else if(difficulte=='m')
         nb_couleurs=3;
     else if(difficulte=='d')
         nb_couleurs=4;
     else std::cout<<"Difficulte parametree a moyen par defaut !"<<std::endl;
+    using couleur = std::array<std::string,4>;
+    couleur c = {"Rouge","Bleu","Jaune","Violet"};
+    std::cout<<"Les couleurs disponibles sont donc : ";
+    int compteur_couleur = 0;
+    while(compteur_couleur < nb_couleurs)
+    {
+        std::cout<<c[compteur_couleur]<<" ";
+        compteur_couleur++;
+    }
+    std::cout<<std::endl;
     std::cout<<"Nombre de manches ? "; std::cin>>nb_manches; std::cout<<std::endl;
     std::cout<<"Que le jeu commence ! " ; std::cout<<std::endl<<std::endl;
 }
