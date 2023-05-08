@@ -4,12 +4,6 @@
 #include <conio.h>
 
 const int taille_max = 4;
-using tab = std::array<std::string,taille_max>;
-
-struct rangee
-{
-    tab t;
-};
 
 void init_jeu(int &nb_tentatives, int &nb_couleurs, int &nb_manches)
 {
@@ -51,14 +45,6 @@ void init_jeu(int &nb_tentatives, int &nb_couleurs, int &nb_manches)
     std::cout<<std::endl;
     std::cout<<"Nombre de manches ? "; std::cin>>nb_manches; std::cout<<std::endl;
     std::cout<<"Que le jeu commence ! " ; std::cout<<std::endl<<std::endl;
-}
-
-void init_tab(rangee &r)
-{
-    for(int i=0 ; i < taille_max ; ++i)
-    {
-        r.t[i]="";
-    }
 }
 
 void saisie_joueurs(std::string &j1, std::string &j2)
@@ -115,14 +101,13 @@ void jeu(std::string &code, std::string j2, std::string j1, int nb_tentatives, s
 
 int main()
 {
-    rangee r; int nb_tentatives, nb_couleurs, nb_manches, score_j1=0 , score_j2=0;;
+    int nb_tentatives, nb_couleurs, nb_manches, score_j1=0 , score_j2=0;
     init_jeu(nb_tentatives,nb_couleurs,nb_manches);
-    init_tab(r);
     std::string j1, j2;
     saisie_joueurs(j1,j2);
     std::string code; int tour=0;
     int manche=0;
-    while(manche <= nb_manches)
+    while(manche < nb_manches)
     {
         std::string gagnant ; 
         manche++;
