@@ -58,8 +58,6 @@ void genere_code(std::string &code, int nb_couleurs)
         code += couleurs[index];
     }
 
-    // Afficher le code
-    std::cout << "Code : " << code << std::endl;
 }
 
 bool verif(std::string reponse, std::string code)
@@ -87,7 +85,7 @@ void genere_indice(std::string reponse, std::string code)
     int mauvaise_couleur=0;
     for(int i=0 ; i<4 ; ++i)
     {
-        int occ_rep = compt_couleur(reponse[i],reponse), occ_code = compt_couleur(code[i],code);
+        int occ_rep = compt_couleur(reponse[i],reponse), occ_code = compt_couleur(reponse[i],code);
         if (occ_rep != occ_code)
             if(occ_code < occ_rep)
                 mauvaise_couleur = occ_rep - occ_code;
