@@ -7,6 +7,7 @@
 
 void init_jeu(std::string &j1, int &nb_manches, int &nb_couleurs,int &nb_tentatives)
 {
+    nb_couleurs=4;
     char rep;
     std::cout<<"Bienvenue dans le menu du jeu MasterMind. Voulez-vous une explication du deroulement du jeu ? (o/n)"; std::cin>>rep;std::cout<<std::endl;
     if(rep=='o')
@@ -25,26 +26,21 @@ void init_jeu(std::string &j1, int &nb_manches, int &nb_couleurs,int &nb_tentati
     }
     std::cout<<"Nom du joueur ? " ; std::cin>>j1;
     std::cout<<"Nombre de manches ? " ; std::cin>>nb_manches;
-    std::cout<<"Nombre de tentatives ? "; std::cin>>nb_tentatives;
-    char difficulte; 
+    char difficulte;
     std::cout<<"Quelle difficulte ? (facile(f),moyen(m),difficile(d)) "; std::cin>>difficulte;
-    if(difficulte=='f')
-        nb_couleurs=2;
-    else if(difficulte=='m')
-        nb_couleurs=3;
-    else if(difficulte=='d')
-        nb_couleurs=4;
-    else std::cout<<"Difficulte parametree a moyen par defaut !"<<std::endl;
-    using couleur = std::array<std::string,4>;
-    couleur c = {"Rouge","Bleu","Jaune","Violet"};
-    std::cout<<"Les couleurs disponibles sont donc : ";
-    int compteur_couleur = 0;
-    while(compteur_couleur < nb_couleurs)
+    while(difficulte!='f' and difficulte!='m' and difficulte!='d')
     {
-        std::cout<<c[compteur_couleur]<<" ";
-        compteur_couleur++;
+        std::cout<<"Saisie incorrecte ! Quelle difficulte ? (facile(f),moyen(m),difficile(d)) " ; std::cin>>difficulte;
     }
-    std::cout<<std::endl;
+    if(difficulte=='f')
+        nb_tentatives=10;
+    else if(difficulte=='m')
+        nb_tentatives=8;
+    else if(difficulte=='d')
+        nb_tentatives=6;
+    std::cout<<"Vous avez "<<nb_tentatives<<" tentatives pour trouver la reponse ! "<<std::endl;
+    std::cout<<"Vous allez jouer avec les 4 couleurs suivante : Rouge(R) , Bleu(B) , Jaune(J) , Violet(V) "<<std::endl;
+    std::cout<<"Que le jeu commence ! " ; std::cout<<std::endl<<std::endl;
 }
 
 void genere_code(std::string &code, int nb_couleurs)
@@ -57,7 +53,6 @@ void genere_code(std::string &code, int nb_couleurs)
         int index = std::rand() % nb_couleurs;
         code += couleurs[index];
     }
-
 }
 
 bool verif(std::string reponse, std::string code)
@@ -82,24 +77,17 @@ int compt_couleur(char couleur, std::string suite_couleurs)
 
 void genere_indice(std::string reponse, std::string code)
 {
-    int mauvaise_couleur=0;
-    for(int i=0 ; i<4 ; ++i)
-    {
-        int occ_rep = compt_couleur(reponse[i],reponse), occ_code = compt_couleur(reponse[i],code);
-        if (occ_rep != occ_code)
-            if(occ_code < occ_rep)
-                mauvaise_couleur = occ_rep - occ_code;
-            else 
-                mauvaise_couleur = occ_code - occ_rep;
-    }
-    int mauvais_ordre=0;
+    int mauvaise_ordre=0;
+    int bonne_ordre=0;
     for(int i=0 ; i<4 ; i++)
     {
-        if(reponse[i]!=code[i])
-            mauvais_ordre++;
+        if(reponse[i]==code[i])
+            bonne_ordre++;
+        else
+            mauvaise_ordre++;
     }
-    std::cout<<"Vous avez "<<mauvaise_couleur<<" mauvaises couleurs "<<std::endl;
-    std::cout<<"Vous avez "<<mauvais_ordre<<" couleur dans le mauvais emplacement "<<std::endl;
+    std::cout<<"Vous avez "<<bonne_ordre<<" couleurs dans le bon emplacement "<<std::endl;
+    std::cout<<"Vous avez "<<mauvaise_ordre<<" couleurs correctes mais mal placees "<<std::endl;
 }
 
 void jeu(std::string &code, std::string j1, int nb_tentatives, int nb_couleurs, int &manche_gagnee)
@@ -120,7 +108,7 @@ void jeu(std::string &code, std::string j1, int nb_tentatives, int nb_couleurs, 
         else
             genere_indice(reponse,code);
     }
-    std::cout<<"Vous avez perdu cette manche !"<<std::endl;
+    std::cout<<"Vous avez perdu cette manche ! La reponse etait : "<<code<<std::endl;
 }
 
 int main()
