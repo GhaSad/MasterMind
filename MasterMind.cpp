@@ -7,6 +7,7 @@ const int taille_max = 4;
 
 void init_jeu(int &nb_tentatives, int &nb_couleurs, int &nb_manches)
 {
+    nb_couleurs = 4;
     char rep;
     std::cout<<"Bienvenue dans le menu du jeu MasterMind. Voulez-vous une explication du deroulement du jeu ? (o/n)"; std::cin>>rep;std::cout<<std::endl;
     if(rep=='o')
@@ -23,25 +24,20 @@ void init_jeu(int &nb_tentatives, int &nb_couleurs, int &nb_manches)
         std::cout<<"Rouge(R) , Bleu(B), Jaune(J), Violet(V) "<<std::endl;
         std::cout<<"Si la manche se termine avant que le code ne soit devine, le premier joueur gagne, dans le cas contraire, le deuxieme joueur emporte la manche "<<std::endl<<std::endl;
     }
-    std::cout<<"Combien de tentatives ? "; std::cin>>nb_tentatives;
     char difficulte;
     std::cout<<"Quelle difficulte ? (facile(f),moyen(m),difficile(d)) "; std::cin>>difficulte;
-    if(difficulte=='f')
-        nb_couleurs=2;
-    else if(difficulte=='m')
-        nb_couleurs=3;
-    else if(difficulte=='d')
-        nb_couleurs=4;
-    else std::cout<<"Difficulte parametree a moyen par defaut !"<<std::endl;
-    using couleur = std::array<std::string,4>;
-    couleur c = {"Rouge","Bleu","Jaune","Violet"};
-    std::cout<<"Les couleurs disponibles sont donc : ";
-    int compteur_couleur = 0;
-    while(compteur_couleur < nb_couleurs)
+    while(difficulte!='f' or difficulte!='m' or difficulte!='d')
     {
-        std::cout<<c[compteur_couleur]<<" ";
-        compteur_couleur++;
+        std::cout<<"Saisie incorrecte ! Quelle difficulte ? (facile(f),moyen(m),difficile(d)) " ; std::cin>>difficulte;
     }
+    if(difficulte=='f')
+        nb_tentatives=10;
+    else if(difficulte=='m')
+        nb_tentatives=8;
+    else if(difficulte=='d')
+        nb_tentatives=6;
+    std::cout<<"Vous avez donc "<<nb_tentatives<<" tentatives pour trouver la reponse !  "<<std::endl;
+    std::cout<<"Vous allez jouer avec les 4 couleurs suivante : Rouge(R) , Bleu(B) , Jaune(J) , Violet(V) "<<std::endl;
     std::cout<<std::endl;
     std::cout<<"Nombre de manches ? "; std::cin>>nb_manches; std::cout<<std::endl;
     std::cout<<"Que le jeu commence ! " ; std::cout<<std::endl<<std::endl;
