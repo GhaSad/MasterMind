@@ -1,0 +1,30 @@
+@charset "UTF-8";
+.sitebar{
+    display: inline-block;
+    /* background-color: blueviolet; */
+    text-align: center;
+    overflow: auto;
+    margin: auto;
+}
+body{
+    background-color: bisque;
+    color: mediumvioletred;
+}
+h1{
+    text-align: center;
+    font-weight: bold;
+    font-style: italic;
+}
+.list{
+    text-indent: 30px;
+    line-height: 3;
+    margin: 10px;
+    list-style-type: georgian;
+}
+/* .formule{
+    text-align: center;
+    text-indent: 30px;
+} */
+.formule2{
+    text-align: center;
+}
