@@ -4,6 +4,9 @@
 #include <conio.h>
 #include <cstdlib>
 #include <ctime>
+#include <algorithm>
+
+const int nb_couleurs = 2;
 
 void saisie_code(std::string &code)
 {
@@ -16,32 +19,6 @@ void saisie_code(std::string &code)
     std::cout<<std::endl;
 }
 
-void genere_reponse(std::string &reponse, int nb_couleurs)
-{
-    char couleurs[4] = {'B', 'R', 'J', 'V'};
-    reponse = "";
-    std::srand(std::time(NULL));
-    for(int i = 0; i < 4; ++i)
-    {
-        int index = std::rand() % nb_couleurs;
-        reponse += couleurs[index];
-    }
-    std::cout<<reponse<<std::endl;
-}
-
-void melange(std::string &rep) 
-{
-    std::srand(std::time(NULL));
-    int n = rep.length();
-    for (int i = n - 1; i > 0; --i) 
-    {
-        int j = std::rand() % (i + 1);
-        char temp = rep[i];
-        rep[i] = rep[j];
-        rep[j] = temp;
-    }
-}
-
 bool verif(std::string reponse, std::string code)
 {
     if(reponse.length()!=code.length())
@@ -51,7 +28,7 @@ bool verif(std::string reponse, std::string code)
     else return false;
 }
 
-int compt_couleur(char couleur, std::string suite_couleurs)
+int occurence_couleur(char couleur, std::string suite_couleurs)
 {
     int compteur=0;
     for(int i=0 ; i<suite_couleurs.length(); ++i)
@@ -62,59 +39,96 @@ int compt_couleur(char couleur, std::string suite_couleurs)
     return compteur;
 }
 
-void indice(std::string reponse, std::string code, int &mauvaise_couleur, int &mauvais_ordre)
+void indice(std::string tentative, std::string code, int &bon_ordre, int &mauvais_ordre)
 {
-    mauvaise_couleur=0;
-    for(int i=0 ; i<4 ; ++i)
-    {
-        int occ_rep = compt_couleur(reponse[i],reponse), occ_code = compt_couleur(reponse[i],code);
-        if (occ_rep != occ_code)
-            if(occ_code < occ_rep)
-                mauvaise_couleur = occ_rep - occ_code;
-            else 
-                mauvaise_couleur = occ_code - occ_rep;
-    }
-    mauvais_ordre=0;
-    for(int i=0 ; i<4 ; i++)
-    {
-        if(reponse[i]!=code[i])
-            mauvais_ordre++;
-    }
-    std::cout<<"Vous avez "<<mauvaise_couleur<<" mauvaises couleurs "<<std::endl;
-    std::cout<<"Vous avez "<<mauvais_ordre<<" couleur dans le mauvais emplacement "<<std::endl;
-}
-
-void resolution(std::string &reponse, std::string code, int &mauvaise_couleur, int &mauvais_ordre, int nb_couleurs)
-{
-    genere_reponse(reponse,nb_couleurs);
-    while(!verif(reponse,code))
-    {
-        indice(reponse,code,mauvaise_couleur,mauvais_ordre);
-        if((mauvaise_couleur=0) and (mauvais_ordre>0))
-        {
-            melange(reponse);
-            std::cout<<"tentative :" <<reponse<<std::endl;
-            indice(reponse,code,mauvaise_couleur,mauvais_ordre);
+    bon_ordre = 0 , mauvais_ordre = 0;
+    // Tableaux de booléens pour éviter de compter plusieurs fois la même couleur
+    bool trouve_code[4] = {false};
+    bool trouve_tentative[4] = {false};
+    
+    // Comptage des couleurs dans le bon ordre
+    for (int i = 0; i < 4; ++i) {
+        if (tentative[i] == code[i]) {
+            bon_ordre++;
+            trouve_code[i] = true;
+            trouve_tentative[i] = true;
         }
-        else if((mauvaise_couleur>0) and (mauvais_ordre>0))
-        {
-            if(!verif(reponse,code))
-            {
-                char l='';
-                l=reponse[1];
-                reponse[1]=reponse[3];
-                reponse[3]=reponse[2];
-                reponse[2]=reponse[3];
+    }
+    
+    // Comptage des couleurs correctes mais mal placées
+    for (int i = 0; i < 4; ++i) {
+        if (!trouve_tentative[i]) {
+            for (int j = 0; j < 4; ++j) {
+                if (!trouve_code[j] and tentative[i] == code[j]) {
+                    mauvais_ordre++;
+                    trouve_code[j] = true;
+                    break;
+                }
             }
         }
     }
+    std::cout<<"Vous avez "<<bon_ordre<<" couleurs dans le bon emplacement "<<std::endl;
+    std::cout<<"Vous avez "<<mauvais_ordre<<" couleurs correctes mais mal placees "<<std::endl;
 }
+
+void resolution(std::string& reponse, std::string& code) 
+{
+    int bon_ordre=0, mauvais_ordre=0;
+    int occurence_rouge = 0;
+    reponse = "RRRR";
+    std::cout << "tentative " << reponse << std::endl;
+    if(verif(reponse, code)) {
+        std::cout << "La reponse est : " << reponse << std::endl;
+        return;
+    }
+    else {
+        indice(reponse, code, bon_ordre, mauvais_ordre);
+        occurence_rouge = bon_ordre;
+        std::cout<<"occurence rouge est : "<<occurence_rouge<<std::endl;
+    }
+    bool trouve_code[4] = {false};
+    while(occurence_rouge > 0) 
+    {
+        for(int i = 0; i < 4; ++i) 
+        {
+            reponse = "BBBB";
+            int mauvais_ordre1 = 0;
+            if(!trouve_code[i]) 
+            {
+                reponse[i] = 'R';
+                std::cout << "tentative : " << reponse << std::endl;
+                indice(reponse, code, bon_ordre, mauvais_ordre1);
+                if(mauvais_ordre1 == mauvais_ordre - 2 or mauvais_ordre1==0) 
+                {
+                    trouve_code[i] = true;
+                    break;
+                }
+                mauvais_ordre = mauvais_ordre1;
+            }
+        }
+        occurence_rouge--;
+    }
+    for(int i = 0; i < 4; ++i) {
+        std::cout<<trouve_code[i]<<std::endl;
+    }
+    for(int i = 0; i < 4; ++i)
+    {
+        if(trouve_code[i]) {
+            reponse[i] = 'R';
+        }
+        else if(!trouve_code[i]) {
+            reponse[i] = 'B';
+        }
+    }
+    std::cout << "La reponse est : " << reponse << std::endl;
+}
+    
+
 
 int main()
 {
-    std::string code, reponse; int nb_couleurs=2, mauvaise_couleur,mauvais_ordre;
+    std::string code, reponse; int mauvais_ordre=0, bon_ordre=0;
     saisie_code(code);
-    std::cout<<"Nb tentatives ? "; 
-    resolution(reponse,code,mauvaise_couleur,mauvais_ordre,nb_couleurs);
+    resolution(reponse,code);
     return 0;
 }
