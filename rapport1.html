@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="rapport1.css" rel="stylesheet">
+    <title>1ere Rapport</title>
+</head>
+<body>
+    <div class="sitebar">
+        <div class="sitebar"><a href="./MasterMind.html" target="_blank">Presentation</a></div>
+        <div class="sitebar"><a href="./jeu.html">À propos du jeu MasterMind</a></div>
+        <div class="sitebar"><a href="#rapport" target="_blank">Notre travail</a></div>
+    </div>
+    <p>La bibliothèque conio.h sera utilisée dans la procédure "saisie_code"</p>
+
+    <p>On a définie une structure de donnée "rangée" contenant un tableau et un entier représentant sa taille</p>
+
+    <p>Une procédure init_jeu qui permet de saisir le nombre de tentatives, le nombre de couleur, ainsi que la taille de la rangée, qui affiche aussi les couleurs pouvant être séléctionnées</p>
+
+    <p>Une procédure init_tab qui remet les valeurs du tableau à la chaine vide</p>
+
+    <p>Une procédure saisie_joueurs qui permet de saisir le pseudo des deux joueurs, le j1 étant le premier à saisir le code</p>
+
+    <p>Une procédure saisie_code (Maintenant incluse dans la procédure de jeu ) :</p>
+ 		<ul>
+            <li>La boucle while s'arrete dès que la taille du code est égale à la taille des rangées</li>    
+            <li>La fonction getch() permet de ne pas afficher la saisie dans la console, et donc le code est caché</li>    
+        </ul>
+
+    <p>Une fonction booléenne verif qui vérifie si la réponse saisie est égale au code secret
+
+    <p>La procédure jeu qui permet de lancer le jeu : </p>
+    <ul>
+        <li>La boucle while s'arrete des que le compteur "tour" est strictement supérieur au nombre de tentatives imposé</li>
+        <li>Le deuxieme joueur saisie la réponse</li>
+        <li>La procédure s'arrete si la fonction verif envoie "true", et affiche le vainqueur</li>
+        <li>Si la reponse est incorrecte, le premier joueur saisie l'indice qui permet d'indiquer au deuxieme joueur ses fautes</li>
+        <li>Quand on sort de la boucle while, cela signifie que le nombre de tentatives maximum est atteint, et donc le deuxieme joueur a perdu</li>
+    </ul>
+
+    <p>Pour le main, on fait appel à toute les procédures précédentes pour initialiser le jeu. Ensuite, on utilise une boucle while pour que le jeu se répète jusqu'a atteindre le nombre de manche saisi par le joueur.
+    Dans la boucle while, on fait appel à la procédure de jeu 2 fois, une fois pour le premier joueur, et une fois pour le deuxieme, ensuite on garde le nom du gagnant de la manche à partir de la procédure jeu.
+    On ajoute 1 au score du gagnant de la manche.
+    Pour finir, on affiche le gagnant de la partie, avec le score le plus élevé, ou on affiche une égalité.</p>
+</body>
+</html>

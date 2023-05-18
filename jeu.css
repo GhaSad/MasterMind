@@ -1,31 +1,46 @@
 @charset "UTF-8";
 .sitebar{
     display: inline-block;
-    /* background-color: blueviolet; */
-    text-align: center;
+    /* text-align: center; */
     overflow: auto;
     margin: auto;
+    overflow: hidden;
+    padding: 5px;
+    /* background-color: antiquewhite; */
+    background-color: #faebd7;
+    border-radius: 20px;
 }
 body{
     background-color: bisque;
     color: mediumvioletred;
 }
 h1{
-    text-align: center;
+    text-align:  justify;
     font-weight: bold;
     font-style: italic;
-}
-.list{
     text-indent: 30px;
-    line-height: 3;
-    margin: 10px;
+}
+p{
+    text-indent: 50px;
     list-style-type: georgian;
+    margin: 20px;
 }
-.formule2{
+li,ul{
+    list-style-type: georgian;
+    margin: 20px;
+    text-indent: 30px;
+}
+
+
+/* .formule2{
     text-align: center;
-}
+} */
 .center{
     display: block;
     margin-left: auto ;
     margin-right: auto;
+    opacity: 0.5;
+}
+img:hover{
+    opacity: 1;
 }

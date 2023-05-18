@@ -10,20 +10,32 @@
 <body>
     <div class="sitebar">
         <div class="sitebar"><a href="./MasterMind.html" target="_blank">Presentation</a></div>
-        <div class="sitebar"><a href="#jeu">Jeu MasterMind</a></div>
-        <div class="sitebar"><a href="./rapport.html" target="_blank">Le Rapport</a></div>
+        <div class="sitebar"><a href="#jeu">À propos du jeu MasterMind</a></div>
+        <div class="sitebar"><a href="./rapport.html" target="_blank">Notre travail</a></div>
     </div>
-    <h1>Les Stratégies du MasterMind</h1>
     <img src="./mastermind-en-bois.jpg" alt="game photo" height="300" width="300" class="center">
-    <p>blablablablablabla</p>
-    <ul class="list">
-        <li>Critère 1 : Trouver le nombre d'occurrences d'une couleur. Pour cela on remplit la combinaison à tenter de la couleur recherchée. Le nombre de couleurs bien placées fourni en retour moins le nombre de boules que nous avons déjà correctement placé, correspond alors au nombre d'occurrences de la couleur</li>
-        <li>Critère 2 : Trouver la position exacte de chaque occurrence de couleur. Pour cela ont teste chaque position avec la couleur en cours et on rempli le reste de la combinaison tenté avec la couleur suivante. Lorsque le nombre de couleurs mal placées fourni en retour est égale à 0, on à trouvé la position de la couleur</li>
-        <li>Critère 3 : Lors de la recherche de la position exacte de la couleur courante nous complétons les cases de la combinaison non encore déterminée avec la couleur suivante (Critère 2).</li>
-            <p>Il est alors possible de connaître le nombre d'occurrences de la couleur suivante, sans avoir besoin de la tester lors de la prochaine itération de la boucle. En effet, en analysant le nombre de boules bien placées et le nombre de boules mal placé on peut directement obtenir cette information par la formule :</p>
+    <h1>Aperçu du jeu</h1>
+    <p>Le Mastermind est un jeu de logique et de déduction qui repose sur un principe très simple : retrouver une combinaison de 4 pions (parmi 8 couleurs possibles) en moins de 10 essais.</p>
 
-						<p class="formule2">Nombre_de_boules_de_la_couleur_suivante = (N bBienPlace+N bM alPlace)-N bDejaT rouve-1.</p>
-        <li>Critère 4   :   Puisqu'avec le Critère 3 nous connaissons le nombre d'occurrences de la couleur prochainement testé, nous pouvons savoir si cette couleur est présente ou non. Il suffit en effet de regarder si son nombre d'occurrence vaut zéro. Si c'est le cas, au lieu de continuer à compléter la combinaison avec cette couleur, on complète la combinaison avec la couleur supérieure.</li>
+    <p>Ce jeu de société, où les deux adversaires jouent à tour de rôle, est accessible à tous à partir de 7 ans. Il constitue même un excellent exercice pour entretenir sa mémoire et ses capacités de réflexion à tout âge.</p>
+    <h1>Règles du Mastermind</h1>
+    <p>Le but du Mastermind est de découvrir en moins de 10 essais une combinaison de 4 billes de couleurs parmi 8 couleurs possibles.</p>
+    <p>A chaque essai, le joueur reçoit des indications sur les couleurs et les emplacements qu'il a choisis :</p>
+    <ul>
+        <li>un pion noir (ou rouge) indique une bille bien placée.</li>
+        <li>un pion blanc indique une bille de la bonne couleur mais mal placée.</li>
     </ul>
+    <p>La stratégie consiste à choisir les couleurs et leur emplacement en fonction des coups précédents. Le but est d’obtenir le plus d’informations et de se rapprocher le plus rapidement possible de la solution puisque le nombre de propositions est limité.</p>
+    
 </body>
 </html>
+
+<!-- <ul class="list">
+    <li>Critère 1 : Trouver le nombre d'occurrences d'une couleur. Pour cela on remplit la combinaison à tenter de la couleur recherchée. Le nombre de couleurs bien placées fourni en retour moins le nombre de boules que nous avons déjà correctement placé, correspond alors au nombre d'occurrences de la couleur</li>
+    <li>Critère 2 : Trouver la position exacte de chaque occurrence de couleur. Pour cela ont teste chaque position avec la couleur en cours et on rempli le reste de la combinaison tenté avec la couleur suivante. Lorsque le nombre de couleurs mal placées fourni en retour est égale à 0, on à trouvé la position de la couleur</li>
+    <li>Critère 3 : Lors de la recherche de la position exacte de la couleur courante nous complétons les cases de la combinaison non encore déterminée avec la couleur suivante (Critère 2).</li>
+        <p>Il est alors possible de connaître le nombre d'occurrences de la couleur suivante, sans avoir besoin de la tester lors de la prochaine itération de la boucle. En effet, en analysant le nombre de boules bien placées et le nombre de boules mal placé on peut directement obtenir cette information par la formule :</p>
+
+                    <p class="formule2">Nombre_de_boules_de_la_couleur_suivante = (N bBienPlace+N bM alPlace)-N bDejaT rouve-1.</p>
+    <li>Critère 4   :   Puisqu'avec le Critère 3 nous connaissons le nombre d'occurrences de la couleur prochainement testé, nous pouvons savoir si cette couleur est présente ou non. Il suffit en effet de regarder si son nombre d'occurrence vaut zéro. Si c'est le cas, au lieu de continuer à compléter la combinaison avec cette couleur, on complète la combinaison avec la couleur supérieure.</li>
+</ul> -->

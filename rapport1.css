@@ -1,4 +1,3 @@
-@charset "UTF-8";
 body{
     background-color: bisque;
     color: mediumvioletred;
@@ -13,21 +12,4 @@ body{
     background-color:#faebd7;
     border-radius: 20px;
     /* float: left; */
-}
-.prek{
-    float: left;
-    margin: 10px;
-    padding: 50px;
-    display: inline;
-}
-.preg{
-    float: right;
-    margin: 10px;
-    padding: 50px;
-    display: inline;
-}
-h1{
-    text-align: center;
-    font-weight: bold;
-    font-style: italic;
 }

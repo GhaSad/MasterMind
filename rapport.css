@@ -1,12 +1,36 @@
 @charset "UTF-8";
 .sitebar{
     display: inline-block;
-    /* background-color: blueviolet; */
-    text-align: center;
+    /* text-align: center; */
     overflow: auto;
     margin: auto;
+    overflow: hidden;
+    padding: 5px;
+    background-color: #faebd7;
+    border-radius: 20px;
 }
 body{
     background-color: bisque;
     color: mediumvioletred;
+}
+h3{
+    font-weight: bold;
+    font-style: italic;
+}
+.list{
+    text-indent: 30px;
+    line-height: 3;
+    margin: 10px;
+    list-style-type: georgian;
+}
+.right{
+    display: inline-block;
+    margin-left: auto;
+    position:relative;
+    left: 300px;
+    top: auto;
+
+}
+.click{
+    float: left;
 }
