@@ -1,15 +1,30 @@
 body{
     background-color: bisque;
     color: mediumvioletred;
+    margin: 20px;
 }
 .sitebar{
-    display: inline-block;
-    /* text-align: center; */
+    display: flex;
+    justify-content: center;
     overflow: auto;
     margin: auto;
     overflow: hidden;
-    padding: 5px;
-    background-color:#faebd7;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #faebd7;
     border-radius: 20px;
-    /* float: left; */
+}
+.sitebar a{
+    text-decoration: none;
+    color: mediumvioletred;
+    margin: 0 10px;
+}
+.sitebar:hover{
+    font-size: larger;
+    transition: all;
+}
+p{
+    text-indent: 50px;
+    line-height: 2;
+    line-height: 2;
 }

@@ -1,21 +1,32 @@
 @charset "UTF-8";
 .sitebar{
-    display: inline-block;
-    /* text-align: center; */
+    display: flex;
+    justify-content: center;
     overflow: auto;
     margin: auto;
     overflow: hidden;
-    padding: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
     background-color: #faebd7;
     border-radius: 20px;
+}
+.sitebar a{
+    text-decoration: none;
+    color: mediumvioletred;
+    margin: 0 10px;
+}
+.sitebar:hover{
+    font-size: larger;
+    transition: all;
 }
 body{
     background-color: bisque;
     color: mediumvioletred;
 }
-h3{
+h2{
     font-weight: bold;
     font-style: italic;
+    text-indent: 30px;
 }
 .list{
     text-indent: 30px;
@@ -33,4 +44,10 @@ h3{
 }
 .click{
     float: left;
+}
+img{
+    opacity: 0.5;
+}
+img:hover{
+    opacity: 1;
 }

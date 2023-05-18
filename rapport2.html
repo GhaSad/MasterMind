@@ -9,9 +9,25 @@
 </head>
 <body>
     <div class="sitebar">
-        <div class="sitebar"><a href="./MasterMind.html" target="_blank">Presentation</a></div>
+        <div class="sitebar"><a href="./MasterMind.html" target="_blank">Presentation du GK group</a></div>
         <div class="sitebar"><a href="./jeu.html">À propos du jeu MasterMind</a></div>
-        <div class="sitebar"><a href="#rapport" target="_blank">Notre travail</a></div>
+        <div class="sitebar"><a href="./rapport.html">Notre travail</a></div>
     </div>
+    <p>La procédure init_jeu permet d'afficher l'explication du jeu, ensuite la saisie du nom du joueur, le nombre de manche, et la difficulté qui change la valeur du nombre de couleurs. Ensuite on affiche les couleurs disponibles selon le nombre de couleur.</p>
+
+    <p>La procédure genere_code permet de generer un string de taille 4, en fonction de la difficulté selectionnée : facile-> string de taille 4 contenant 2couleurs(R,B), etc...</p>
+
+    <p>La fonction booléenne verif permet de vérifier si la réponse est conforme au code.</p>
+
+    <p>La fonction entière compt_couleur renvoie l'occurence d'une couleure donnée en paramètre dans une suite de couleurs ( soit réponse ou code secret ). On s'en servira dans la procédure genère_indice.</p>
+
+    <p>La procédure genere_indice prend en paramètres la réponse et le code secret.</p>
+    <p>On déclare un compteur entier à 0 qui servira à stocker le nombre de couleurs inexacts dans la réponse.</p>
+    <p>**  La premiere boucle permet de comparer l'occurence de la premiere couleur dans la réponse et le code : 
+        Si l'occurence n'est pas la meme alors je stocke la difference des deux dans une variable.</p>
+
+    <p>**  La deuxieme boucle me permet de savoir combien de couleurs ne sont pas dans le bonne ordre, seulement en comparant lettre par lettre le code et la réponse.</p>
+
+    <p>La procédure jeu permet de faire appel à toute les procédures et fonctions selon le nombre de tentatives saisie par le joueur.</p>
 </body>
 </html>
