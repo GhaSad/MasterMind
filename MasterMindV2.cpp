@@ -53,18 +53,15 @@ void genere_code(std::string &code, int nb_couleurs)
         int index = std::rand() % nb_couleurs;
         code += couleurs[index];
     }
+    std::cout<<"Le code est : "<<code<<std::endl;
 }
 
-bool verif(std::string reponse, std::string code)
+bool verif1(std::string reponse, std::string code)
 {
-    if(reponse.length()!=code.length())
-        return false;
-    else if(reponse==code)
-        return true;
-    else return false;
+    return(reponse==code);
 }
 
-int compt_couleur(char couleur, std::string suite_couleurs)
+int occurence_couleur(char couleur, std::string suite_couleurs)
 {
     int compteur=0;
     for(int i=0 ; i<suite_couleurs.length(); ++i)
@@ -75,20 +72,39 @@ int compt_couleur(char couleur, std::string suite_couleurs)
     return compteur;
 }
 
-void genere_indice(std::string reponse, std::string code)
+void indice(const std::string& tentative, const std::string& secret)
 {
-    int mauvaise_ordre=0;
-    int bonne_ordre=0;
-    for(int i=0 ; i<4 ; i++)
-    {
-        if(reponse[i]==code[i])
-            bonne_ordre++;
-        else
-            mauvaise_ordre++;
+    int bon_ordre = 0;
+    int mauvais_ordre = 0;
+    
+    // Tableaux de booléens pour éviter de compter plusieurs fois la même couleur
+    bool trouve_secret[4] = {false};
+    bool trouve_tentative[4] = {false};
+    
+    // Comptage des couleurs dans le bon ordre
+    for (int i = 0; i < 4; ++i) {
+        if (tentative[i] == secret[i]) {
+            bon_ordre++;
+            trouve_secret[i] = true;
+            trouve_tentative[i] = true;
+        }
     }
-    std::cout<<"Vous avez "<<bonne_ordre<<" couleurs dans le bon emplacement "<<std::endl;
-    std::cout<<"Vous avez "<<mauvaise_ordre<<" couleurs correctes mais mal placees "<<std::endl;
+    // Comptage des couleurs correctes mais mal placées
+    for (int i = 0; i < 4; ++i) {
+        if (!trouve_tentative[i]) {
+            for (int j = 0; j < 4; ++j) {
+                if (!trouve_secret[j] and tentative[i] == secret[j]) {
+                    mauvais_ordre++;
+                    trouve_secret[j] = true;
+                    break;
+                }
+            }
+        }
+    }
+    std::cout<<"Vous avez "<<bon_ordre<<" couleurs dans le bon emplacement "<<std::endl;
+    std::cout<<"Vous avez "<<mauvais_ordre<<" couleurs correctes mais mal placees "<<std::endl;
 }
+
 
 void jeu(std::string &code, std::string j1, int nb_tentatives, int nb_couleurs, int &manche_gagnee)
 {
@@ -99,14 +115,14 @@ void jeu(std::string &code, std::string j1, int nb_tentatives, int nb_couleurs, 
     {
         tour++;
         std::cout<<j1<<" a vous de jouer : "; std::cin>>reponse;
-        if(verif(code,reponse))
+        if(verif1(code,reponse))
         {
             std::cout<<j1<<" a gagne en "<<tour<<" tours !"<<std::endl;
             manche_gagnee +=1 ;
             return;
         }
         else
-            genere_indice(reponse,code);
+           indice(reponse,code);
     }
     std::cout<<"Vous avez perdu cette manche ! La reponse etait : "<<code<<std::endl;
 }
