@@ -60,7 +60,7 @@ void saisie_code(std::string &code, std::string j1)
     std::cout<<std::endl;
 }
 
-bool verif(std::string code, std::string reponse)
+bool verif(std::string reponse, std::string code)
 {
     if(reponse.length()!=code.length())
         return false;
