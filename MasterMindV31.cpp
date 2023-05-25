@@ -15,15 +15,53 @@ std::vector<std::vector<int>> combinaisons;
 std::vector<std::vector<int>> tentativeSuivantes;
 
 
-std::vector<int> saisie_code()
+int chartoint(char lettre)
 {
-    for(int i=0 ; i<TAILLE_CODE ; ++i)
+        if(lettre=='R')
+            return 1;
+        else if(lettre=='B')
+            return 2;
+        else if(lettre=='J')
+            return 3;
+        else if(lettre=='V')
+            return 4;
+        else if(lettre=='M')
+            return  5;
+        else if(lettre=='O')
+            return 6;
+}
+
+std::vector<int> saisie_code()  
+{
+    std::string codeLettre;
+    std::cin>>codeLettre;
+    for(int i = 0 ; i<TAILLE_CODE ; ++i)
     {
-        int chiffre;
-        std::cin>>chiffre;
+        int chiffre = chartoint(codeLettre[i]);
         code.push_back(chiffre);
     }
     return code;
+}
+
+void intTostring(std::vector<int> code) 
+{
+    std::string codeLettre;
+    for(int elem : code)
+    {
+        if(elem==1)
+            codeLettre += "R";
+        else if(elem==2)
+            codeLettre += "B";
+        else if(elem==3)
+            codeLettre += "J";
+        else if(elem==4)
+            codeLettre += "V";
+        else if(elem==5)
+            codeLettre += "M";
+        else if(elem==6)
+            codeLettre += "O";
+    }
+    std::cout<<codeLettre;
 }
 
 void genere_combinaisons(std::vector<std::vector<int>>& combinaisons)
@@ -32,7 +70,6 @@ void genere_combinaisons(std::vector<std::vector<int>>& combinaisons)
     const int MAX = 6; 
     
     int totalCombi = pow(MAX, TAILLE_CODE);  // Calcul du nombre total de combinaisons
-    std::cout<<totalCombi<<std::endl;
     
     for (int i = 0; i < totalCombi; i++) {
         std::vector<int> combi;
@@ -116,19 +153,22 @@ void triCodes(std::vector<std::vector<int>> &combinaisons, std::vector<int> tent
         if (indice != indication(tentative, combinaisons[index])) 
         {
             it = combinaisons.erase(combinaisons.begin() + index);
-        } else 
+        } 
+        else 
         {
             it++;
         }
     }
 }
 
-int scoreMAX(std::map<std::string, int> inputMap) 
+int scoreMAX(std::map<std::string, int> dictio) 
 {
 
     int max = 0;
-    for (auto elem : inputMap) {
-        if (elem.second > max) {
+    for (auto elem : dictio) 
+    {
+        if (elem.second > max) 
+        {
             max = elem.second;
         }
     }
@@ -136,12 +176,11 @@ int scoreMAX(std::map<std::string, int> inputMap)
     return max;
 }
 
-int scoreMIN(std::map<std::vector<int>, int> inputMap)
+int scoreMIN(std::map<std::vector<int>, int> dictio)
 
  {
-
-    int min = 1296;
-    for (auto elem : inputMap) 
+    int min = std::numeric_limits<int>::max();
+    for (auto elem : dictio) 
     {
         if (elem.second < min) 
         {
@@ -191,22 +230,59 @@ std::vector<std::vector<int>> minmax()
 
 std::vector<int> tentativeSuivante(std::vector<std::vector<int>> tentativeSuivantes) 
 {
-
     std::vector<int> suivant;
-
-    for (int i = 0; i < tentativeSuivantes.size(); ++i) {
-        if (find(solutionsProbables.begin(), solutionsProbables.end(), tentativeSuivantes[i]) != solutionsProbables.end()) {
-            return tentativeSuivantes[i];
+    for (int i = 0; i < tentativeSuivantes.size(); ++i) 
+    {
+        bool found = false;
+        for (int j = 0; j < solutionsProbables.size(); ++j) 
+        {
+            if (solutionsProbables[j] == tentativeSuivantes[i]) 
+            {
+                suivant = tentativeSuivantes[i];
+                found = true;
+                break;
+            }
+        }
+        if (found==true) 
+        {
+            break;
         }
     }
-    for (int j = 0; j < tentativeSuivantes.size(); ++j) {
-        if (find(combinaisons.begin(), combinaisons.end(), tentativeSuivantes[j]) != combinaisons.end()) {
-            return tentativeSuivantes[j];
+
+    if (suivant.empty()) 
+    {
+        for (int i = 0; i < tentativeSuivantes.size(); ++i)
+        {
+            bool found = false;
+            for (int j = 0; j < combinaisons.size(); ++j) 
+            {
+                if (combinaisons[j] == tentativeSuivantes[i]) 
+                {
+                    suivant = tentativeSuivantes[i];
+                    found = true;
+                    break;
+                }
+            }
+            if (found==true) 
+            {
+                break;
+            }
         }
     }
-
     return suivant;
 }
+
+
+
+// L'expression find(solutionsProbables.begin(), solutionsProbables.end(), tentativeSuivantes[i]) != solutionsProbables.end() est une comparaison utilisée pour vérifier si l'élément tentativeSuivantes[i] se trouve dans le vecteur solutionsProbables.
+
+// La fonction find est une fonction de la bibliothèque <algorithm> en C++. Elle prend en paramètres un itérateur de début (solutionsProbables.begin()) et un itérateur de fin (solutionsProbables.end()) définissant la plage de recherche, ainsi que la valeur que l'on souhaite trouver (tentativeSuivantes[i]).
+
+// Si l'élément tentativeSuivantes[i] est trouvé dans le vecteur solutionsProbables, la fonction find renverra un itérateur pointant vers cet élément. Dans ce cas, la condition != solutionsProbables.end() sera évaluée à true, indiquant que l'élément a été trouvé.
+
+// En revanche, si l'élément tentativeSuivantes[i] n'est pas présent dans le vecteur solutionsProbables, la fonction find renverra l'itérateur de fin solutionsProbables.end(). Dans ce cas, la condition != solutionsProbables.end() sera évaluée à false, indiquant que l'élément n'a pas été trouvé.
+
+// Ainsi, cette expression permet de vérifier si un élément spécifique est présent dans le vecteur solutionsProbables en effectuant une recherche linéaire.
 
 
 
@@ -217,18 +293,15 @@ int main()
 
     std::cout<<"Saisissez le code : "<<std::endl;
     code=saisie_code();
-    tentative = {1, 1, 2, 2}; //1122
+    tentative = {1, 1, 2, 2}; 
 
     //Création des 1296 combinaisons possibles
     genere_combinaisons(combinaisons);
     solutionsProbables.insert(solutionsProbables.end(), combinaisons.begin(), combinaisons.end());
 
     std::cout << "Code : ";
-    for (int i = 0; i < code.size(); ++i) 
-    {
-        std::cout << code[i] << " ";
-    }
-    std::cout << std::endl;
+    intTostring(code);
+    std::cout <<" "<< std::endl;
     std::cout << std::endl;
 
     while (!gagne) 
@@ -243,15 +316,13 @@ int main()
 
         std::cout << "Tour : " << tour << std::endl;
         std::cout << "Tentative : ";
-        for (int i = 0; i < tentative.size(); ++i) {
-           std:: cout << tentative[i] << " ";
-        }
-        std::cout << "= " << indice << std::endl;
+        intTostring(tentative);
+        std::cout << " = " << indice << std::endl;
 
         //Si l'indice c'est 4 pions noirs, alors le jeu est fini
         if (indice == "BBBB") {
             gagne = true;
-            std::cout << "Game Won!" << std::endl;
+            std::cout << "L'ordinateur a trouve la combinaison !" << std::endl;
             break;
         }
 
