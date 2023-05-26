@@ -1,16 +1,9 @@
--) La procédure init_jeu permet d'afficher l'explication du jeu, ensuite la saisie du nom du joueur, le nombre de manche, et la difficulté qui change la valeur du nombre de couleurs. Ensuite on affiche les couleurs disponibles selon le nombre de couleur.
+-) La procédure init_jeu permet d'afficher l'explication du jeu, ensuite la saisie du nom du joueur, le nombre de manche, et la difficulté . 
 
--) La procédure genere_code permet de generer un string de taille 4, en fonction de la difficulté selectionnée : facile-> string de taille 4 contenant 2couleurs(R,B), etc...
+-) La procédure genere_code permet de generer une chaine de caractères de taille 4
 
 -) La fonction booléenne verif permet de vérifier si la réponse est conforme au code.
 
--) La fonction entière compt_couleur renvoie l'occurence d'une couleure donnée en paramètre dans une suite de couleurs ( soit réponse ou code secret ). On s'en servira dans la procédure genère_indice.
-
--) La procédure genere_indice prend en paramètres la réponse et le code secret.
-   On déclare un compteur entier à 0 qui servira à stocker le nombre de couleurs inexacts dans la réponse.
-*) La premiere boucle permet de comparer l'occurence de la premiere couleur dans la réponse et le code : 
--Si l'occurence n'est pas la meme alors je stocke la difference des deux dans une variable.
-
-*) La deuxieme boucle me permet de savoir combien de couleurs ne sont pas dans le bonne ordre, seulement en comparant lettre par lettre le code et la réponse.
+-) La procédure indice permet de générer un indice selon la tentative actuelle 
 
 -) La procédure jeu permet de faire appel à toute les procédures et fonctions selon le nombre de tentatives saisie par le joueur.
