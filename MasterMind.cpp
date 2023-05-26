@@ -21,12 +21,12 @@ void init_jeu(int &nb_tentatives, int &nb_couleurs, int &nb_manches)
         std::cout<<"Moyen -> 3 couleurs "<<std::endl;
         std::cout<<"Difficle -> 4 couleurs "<<std::endl;
         std::cout<<"Les couleurs disponibles sont : "<<std::endl;
-        std::cout<<"Rouge(R) , Bleu(B), Jaune(J), Violet(V) "<<std::endl;
+        std::cout<<"Rouge(R) , Bleu(B), Jaune(J), Violet(V), Marron(M), Orange(O) "<<std::endl;
         std::cout<<"Si la manche se termine avant que le code ne soit devine, le premier joueur gagne, dans le cas contraire, le deuxieme joueur emporte la manche "<<std::endl<<std::endl;
     }
     char difficulte;
     std::cout<<"Quelle difficulte ? (facile(f),moyen(m),difficile(d)) "; std::cin>>difficulte;
-    while(difficulte!='f' or difficulte!='m' or difficulte!='d')
+    while(difficulte!='f' and difficulte!='m' and difficulte!='d')
     {
         std::cout<<"Saisie incorrecte ! Quelle difficulte ? (facile(f),moyen(m),difficile(d)) " ; std::cin>>difficulte;
     }
@@ -101,7 +101,7 @@ int main()
     init_jeu(nb_tentatives,nb_couleurs,nb_manches);
     std::string j1, j2;
     saisie_joueurs(j1,j2);
-    std::string code; int tour=0;
+    std::string code; 
     int manche=0;
     while(manche < nb_manches)
     {
