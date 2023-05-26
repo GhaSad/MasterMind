@@ -21,7 +21,7 @@ void init_jeu(std::string &j1, int &nb_manches, int &nb_couleurs,int &nb_tentati
         std::cout<<"Moyen -> 3 couleurs "<<std::endl;
         std::cout<<"Difficle -> 4 couleurs "<<std::endl;
         std::cout<<"Les couleurs disponibles sont : "<<std::endl;
-        std::cout<<"Rouge(R) , Bleu(B), Jaune(J), Violet(V) "<<std::endl;
+        std::cout<<"Rouge(R) , Bleu(B), Jaune(J), Violet(V), Marron(M), Orange(O) "<<std::endl;
         std::cout<<"Si la manche se termine avant que le code ne soit devine, le joueur perd la manche "<<std::endl<<std::endl;
     }
     std::cout<<"Nom du joueur ? " ; std::cin>>j1;
