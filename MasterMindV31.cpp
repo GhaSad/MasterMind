@@ -43,6 +43,19 @@ std::vector<int> saisie_code()
     return code;
 }
 
+void debut_jeu()
+{
+    std::cout<<std::endl;
+    std::cout<<"Bienvenue dans la 3eme Version du jeu MasterMind ! "<<std::endl;
+    std::cout<<"Ici, vous allez saisir un code couleur secret de 4 caracteres parmis 6 couleurs , et l'ordinateur devra le deviner "<<std::endl<<std::endl;
+    std::cout<<"Les couleurs disponibles sont : "<<std::endl;
+    std::cout<<"Rouge(R) , Bleu(B), Jaune(J), Violet(V), Marron(M), Orange(O) "<<std::endl<<std::endl;
+    std::cout<<"L'ordinateur vous challenge a lui donner un code qu'il ne pouvra pas deviner en moins de 6 tentatives ! "<<std::endl;
+    std::cout<<"Seriez-vous capable de relever le defi ? Alors bonne chance ;) "<<std::endl<<std::endl;
+    std::cout<<"Saisissez le code : "<<std::endl<<std::endl;
+    code = saisie_code();
+}
+
 void intTostring(std::vector<int> code) 
 {
     std::string codeLettre;
@@ -291,8 +304,7 @@ int main()
     int tour = 1;
     bool gagne = false;
 
-    std::cout<<"Saisissez le code : "<<std::endl;
-    code=saisie_code();
+    debut_jeu();
     tentative = {1, 1, 2, 2}; 
 
     //Création des 1296 combinaisons possibles
