@@ -79,22 +79,20 @@ void intTostring(std::vector<int> code)
 
 void genere_combinaisons(std::vector<std::vector<int>>& combinaisons)
 {
-    const int MIN = 1;
-    const int MAX = 6; 
+    int totalCombi = pow(NB_COULEURS, TAILLE_CODE);  // Calcul du nombre total de combinaisons
     
-    int totalCombi = pow(MAX, TAILLE_CODE);  // Calcul du nombre total de combinaisons
-    
-    for (int i = 0; i < totalCombi; i++) {
+    for (int i = 0; i < totalCombi; i++) 
+    {
         std::vector<int> combi;
         int num = i;
         
         // Parcours des chiffres de la combinaison
-        for (int j = MIN; j <= TAILLE_CODE; j++) {
-            int digit = num % MAX  + MIN;
+        for (int j = 0; j < TAILLE_CODE; j++) 
+        {
+            int digit = num % NB_COULEURS  + 1;
             combi.push_back(digit);
-            num /= MAX;
+            num /= NB_COULEURS;
         }
-        
         combinaisons.push_back(combi);
     }
 }
