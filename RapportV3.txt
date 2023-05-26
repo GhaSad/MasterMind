@@ -1,4 +1,4 @@
-Dans la 3eme version, nous avons besoin de différentes bibliothèques :  
+&Dans la 3eme version, nous avons besoin de différentes bibliothèques :  
 
  - ) iostream
 
@@ -16,9 +16,11 @@ Nous commençons tout d'abord par déclarer deux variables constantes : TAILLE_C
 Ensuite on déclare un vecteur d'entier "Code", un vecteur<int> tentative, un string indice.
 Vient ensuite la déclaration d'un vecteur de vecteurs d'entier "solutionsProbables" , un vecteur<vecteur<int>> "Combinaisons" et enfin un vecteur<vecteur<int>> tentativeSuivantes.
 
--/ Notre première fonction sert à la saisie du code, qui renvoie un vecteur<int>.
+-/ La fonction saisie code permet de saisir le code, et renvoie un vecteur<int> .
 
--/ Ensuite la procédure genere_combinaisons stocke dans le vecteur "Combinaisons" toutes les combinaisons possibles de 4 boules de 6 couleurs différentes.
+-/ La procédure debut_jeu() permet d'afficher une présentation du jeu, et permet aussi à saisir le code.
+
+-/ Ensuite la procédure genere_combinaisons stocke dans le vecteur "Combinaisons" toutes les combinaisons possibles de 4 boules avec 6 couleurs différentes.
 
 -/ La fonction string "indication" renvoie une chaine de caractères qui fait office d'indice.
 
@@ -26,31 +28,31 @@ Vient ensuite la déclaration d'un vecteur de vecteurs d'entier "solutionsProbab
 
 -/ La procédure "tri_codes" prend en paramètre un vecteur de combinaisons, une tentative et une chaine de caractères en guise d'indice : 
 
--) On déclare un int index, et un iterateur "it" qui prend comme premiere valeur la première combinaison dans la liste.
+	-) On déclare un int index, et un iterateur "it" qui prend comme première valeur la première combinaison dans la liste.
 
--) Dans la boucle while tant que "it" n'est pas égale à la dernière combinaison de la liste, on : 
+	-) Dans la boucle while tant que "it" n'est pas égale à la dernière combinaison de la liste, on : 
 	
-	*) On initialise la valeur d'index à la distance entre le début de la liste et l'itérateur it.
+		*) On initialise la valeur d'index à la distance entre le début de la liste et l'itérateur it.
 
-	*) Un première condition nous permet de vérifier si l'indice de la tentative est égale à la chaine renvoyée par indication(tentative, combinaisons[index]).
+		*) Un première condition nous permet de vérifier si l'indice de la tentative est égale à la chaine renvoyée par indication(tentative, 					   combinaisons[index]).
 
-	  Si l'indice de la tentative actuelle et celui de la combinaison considérée ne sont pas les mêmes, cela signifie que la combinaison ne peut pas être la 	    	  bonne, car elle ne produit pas la même indication que la tentative, dans ce cas là, nous supprimons la combinaison de la liste.
+	  	  Si l'indice de la tentative actuelle et celui de la combinaison considérée ne sont pas les mêmes, cela signifie que la combinaison ne peut pas être 		  la bonne, car elle ne produit pas la même indication que la tentative, dans ce cas là, nous supprimons la combinaison de la liste.
 
-	  Dans le cas contraire, nous incrémentons l'itérateur "it".
+	  	  Dans le cas contraire, nous incrémentons l'itérateur "it".
 
 
--/ La fonction entière "scoreMAX" prend en paramètre un dictionnaire de "string : entier". Celle-ci nous renvoie le maximum des valeurs entières en parcourant et comparant les éléments du dictionnaire 1 par 1.
+-/ La fonction entière "scoreMAX" prend en paramètre un map, c'est à dire un dictionnaire de "string : entier". Celle-ci nous renvoie le maximum des valeurs       entières en parcourant et comparant les éléments du dictionnaire 1 par 1.
 
--/ La fonction entière "scoreMIN" prend en paramètre un dictionnaire de " vecteur<int> -> int ". Celle-ci nous renvoie le minimum des valeurs.
+-/ La fonction entière "scoreMIN" prend en paramètre un dictionnaire de " vecteur<int> : int ". Celle-ci nous renvoie le minimum des valeurs.
 
 -/ La fonction minmax() est utilisée pour déterminer la prochaine tentative en utilisant la technique du minimax.
 
-	-) ScoreCount est un map qui compte le nombre d'occurrences de chaque score, tandis que score est un map qui associe chaque combinaison possible à son score 	   maximum. "nextGuesses" est un vecteur qui stockera les prochaines tentatives possibles.
+	-) ScoreCount est un map qui compte le nombre d'occurrences de chaque indice, tandis que score est un map qui associe chaque combinaison possible à son score 	   maximum. "nextGuesses" est un vecteur qui stockera les prochaines tentatives possibles.
 
 	-) La boucle externe for itère sur toutes les combinaisons possibles (combinaisons) pour évaluer leur score maximum.
 
 	-) La boucle interne for itère sur toutes les solutions probables (solutionsProbables) pour calculer le score de chaque combinaison possible en comparant 		   avec chaque solution probable. La fonction indication() est appelée pour obtenir l'indice entre la combinaison et la solution probable.
-	   Pour chaque score obtenu, on met à jour scoreCount en incrémentant le nombre d'occurrences de ce score.
+	   Pour chaque indice obtenu, on met à jour scoreCount en incrémentant le nombre d'occurrences de cet indice.
 	   Ensuite, on détermine le score maximum (max) parmi tous les scores présents dans scoreCount.
 	   On associe chaque combinaison possible à son score maximum en utilisant score.emplace(), en ajoutant une entrée au map score.
 	   On vide scoreCount pour le préparer pour le prochain tour de boucle.
@@ -61,8 +63,35 @@ Vient ensuite la déclaration d'un vecteur de vecteurs d'entier "solutionsProbab
 
 	-) Enfin, on retourne nextGuesses qui contient les combinaisons candidates pour la prochaine tentative.
 
-En résumé, la fonction minmax() évalue le score maximum pour chaque combinaison possible en les comparant avec toutes les solutions probables. En utilisant le score maximum, elle détermine le score minimum parmi toutes les combinaisons possibles. Les combinaisons ayant le score minimum sont considérées comme les candidats potentiels pour la prochaine tentative.
 
--/ La fonction "tentativeSuivante" prend en paramètre la liste "tentativeSuivantes" qui comporte toutes les combinaisons/solutions possibles suite à la fonction "minmax" : 
+-/La fonction tentativeSuivante prend en paramètre un vecteur tentativeSuivantes contenant des vecteurs d'entiers. Elle recherche une combinaison dans tentativeSuivantes qui existe dans le vecteur solutionsProbables. Si une telle combinaison est trouvée, elle est assignée à la variable suivant et renvoyée immédiatement.
 
-	-)
+Si aucune combinaison n'est trouvée dans solutionsProbables, la fonction recherche ensuite une combinaison dans tentativeSuivantes qui existe dans le vecteur combinaisons. Si une telle combinaison est trouvée, elle est assignée à la variable suivant et renvoyée.
+
+Si aucune combinaison n'est trouvée dans solutionsProbables ni dans combinaisons, la fonction renvoie un vecteur vide.
+
+
+-/ Pour le main, c'est assez simple et intuitif : 
+
+	-) On déclare un compteur de tour et un booléen gagne à la valeur "false", on donne la saisie du code au joueur
+
+	-) Ensuite la première tentative est toujours de la valeur "1122" c'est à dire deux boules de la première couleur et deux boules de la deuxieme.
+
+	-) Ensuite on génère toutes le combinaisons possibles dans le vecteur "Combinaisons" et on les stocke aussi dans le vecteur "Solutions possible"
+
+	-) Tant que le booléen gagne est faux, dans la boucle while on effectue : 
+		
+		*) On supprime des deux listes de combinaisons la tentative actuelle
+
+		*) On génère l'indice de la tentative
+
+		*) Si l'indice est "BBBB" alors la tentative est la bonne est le jeu est fini
+
+		*) Dans le cas contraire, on tri les codes
+
+		*) On stocke les combinaisons renvoées par la fonction "minmax" dans un vecteur de combinaions
+
+		*) On obtient la tentative suivante grace à la fonction "tentativeSuivante"
+
+		*) On incrémente le compteur de tour par 1
+
