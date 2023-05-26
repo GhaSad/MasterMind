@@ -20,7 +20,7 @@ void init_jeu(std::string &j1, int &nb_manches, int &nb_couleurs,int &nb_tentati
         std::cout<<"Moyen -> 3 couleurs "<<std::endl;
         std::cout<<"Difficle -> 4 couleurs "<<std::endl;
         std::cout<<"Les couleurs disponibles sont : "<<std::endl;
-        std::cout<<"Rouge(R) , Bleu(B), Jaune(J), Violet(V) "<<std::endl;
+        std::cout<<"Rouge(R) , Bleu(B), Jaune(J), Violet(V), Marron(M), Orange(O) "<<std::endl;
         std::cout<<"Si la manche se termine avant que le code ne soit devine, le premier joueur gagne, dans le cas contraire, le deuxieme joueur emporte la manche "<<std::endl<<std::endl;
     }
     std::cout<<"Nom du joueur ? " ; std::cin>>j1;
@@ -60,17 +60,6 @@ bool verif1(std::string reponse, std::string code)
     return(reponse==code);
 }
 
-int occurence_couleur(char couleur, std::string suite_couleurs)
-{
-    int compteur=0;
-    for(int i=0 ; i<suite_couleurs.length(); ++i)
-    {
-        if(suite_couleurs[i]==couleur)
-            compteur++;
-    }
-    return compteur;
-}
-
 void indice(const std::string& tentative, const std::string& secret)
 {
     int bon_ordre = 0;
@@ -82,17 +71,21 @@ void indice(const std::string& tentative, const std::string& secret)
     
     // Comptage des couleurs dans le bon ordre
     for (int i = 0; i < 4; ++i) {
-        if (tentative[i] == secret[i]) {
+        if (tentative[i] == secret[i]) 
+        {
             bon_ordre++;
             trouve_secret[i] = true;
             trouve_tentative[i] = true;
         }
     }
     // Comptage des couleurs correctes mais mal placées
-    for (int i = 0; i < 4; ++i) {
-        if (!trouve_tentative[i]) {
+    for (int i = 0; i < 4; ++i) 
+    {
+        if (!trouve_tentative[i]) 
+        {
             for (int j = 0; j < 4; ++j) {
-                if (!trouve_secret[j] and tentative[i] == secret[j]) {
+                if (!trouve_secret[j] and tentative[i] == secret[j]) 
+                {
                     mauvais_ordre++;
                     trouve_secret[j] = true;
                     break;
