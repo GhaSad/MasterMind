@@ -17,18 +17,21 @@ std::vector<std::vector<int>> tentativeSuivantes;
 
 int chartoint(char lettre)
 {
+    int chiffre;
         if(lettre=='R')
-            return 1;
+            chiffre = 1;
         else if(lettre=='B')
-            return 2;
+            chiffre = 2;
         else if(lettre=='J')
-            return 3;
+            chiffre = 3;
         else if(lettre=='V')
-            return 4;
+            chiffre = 4;
         else if(lettre=='M')
-            return  5;
+            chiffre = 5;
         else if(lettre=='O')
-            return 6;
+            chiffre = 6;
+
+    return chiffre;
 }
 
 std::vector<int> saisie_code()  
@@ -106,7 +109,8 @@ std::string indication(std::vector<int> tentative, std::vector<int> code)
     
     // Comptage des couleurs dans le bon ordre
     for (int i = 0; i < 4; ++i) {
-        if (tentative[i] == code[i]) {
+        if (tentative[i] == code[i]) 
+        {
             bon_ordre++;
             trouve_code[i] = true;
             trouve_tentative[i] = true;
@@ -117,7 +121,8 @@ std::string indication(std::vector<int> tentative, std::vector<int> code)
     for (int i = 0; i < 4; ++i) {
         if (!trouve_tentative[i]) {
             for (int j = 0; j < 4; ++j) {
-                if (!trouve_code[j] and tentative[i] == code[j]) {
+                if (!trouve_code[j] and tentative[i] == code[j]) 
+                {
                     mauvais_ordre++;
                     trouve_code[j] = true;
                     break;
@@ -209,10 +214,10 @@ std::vector<std::vector<int>> minmax()
     std::vector<std::vector<int>> essaiSuivants;
     int max, min;
 
-    for (int i = 0; i < combinaisons.size(); ++i) 
+    for (unsigned int i = 0; i < combinaisons.size(); ++i) 
     {
 
-        for (int j = 0; j < solutionsProbables.size(); ++j) // ici on cherche l'indice avec la plus grande occurrence
+        for (unsigned int j = 0; j < solutionsProbables.size(); ++j) // ici on cherche l'indice avec la plus grande occurrence
         {                  // et donc c'est comme si on cherchait l'indice avec le plus de chance d'etre trouvé pour cette tentative
 
             std::string pegScore = indication(combinaisons[i], solutionsProbables[j]);
@@ -242,10 +247,10 @@ std::vector<std::vector<int>> minmax()
 std::vector<int> tentativeSuivante(std::vector<std::vector<int>> tentativeSuivantes) 
 {
     std::vector<int> suivant;
-    for (int i = 0; i < tentativeSuivantes.size(); ++i) 
+    for (unsigned int i = 0; i < tentativeSuivantes.size(); ++i) 
     {
         bool found = false;
-        for (int j = 0; j < solutionsProbables.size(); ++j) 
+        for (unsigned int j = 0; j < solutionsProbables.size(); ++j) 
         {
             if (solutionsProbables[j] == tentativeSuivantes[i]) 
             {
@@ -262,10 +267,10 @@ std::vector<int> tentativeSuivante(std::vector<std::vector<int>> tentativeSuivan
 
     if (suivant.empty()) 
     {
-        for (int i = 0; i < tentativeSuivantes.size(); ++i)
+        for (unsigned int i = 0; i < tentativeSuivantes.size(); ++i)
         {
             bool found = false;
-            for (int j = 0; j < combinaisons.size(); ++j) 
+            for (unsigned int j = 0; j < combinaisons.size(); ++j) 
             {
                 if (combinaisons[j] == tentativeSuivantes[i]) 
                 {
