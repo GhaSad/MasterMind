@@ -9,7 +9,7 @@ void init_jeu(int &nb_tentatives, int &nb_couleurs, int &nb_manches)
 {
     nb_couleurs = 4;
     char rep;
-    std::cout<<"Bienvenue dans le menu du jeu MasterMind. Voulez-vous une explication du deroulement du jeu ? (o/n)"; std::cin>>rep;std::cout<<std::endl;
+    std::cout<<" Voulez-vous une explication du deroulement du jeu ? (o/n)"; std::cin>>rep;std::cout<<std::endl;
     if(rep=='o')
     {
         std::cout<<"Le jeu se deroule entre deux joueurs : "<<std::endl;
@@ -17,9 +17,6 @@ void init_jeu(int &nb_tentatives, int &nb_couleurs, int &nb_manches)
         std::cout<<"Et le deuxieme possede un nombre de tentatives choisis pour deviner l'ordre des couleurs "<<std::endl;
         std::cout<<"Apres la saisie de la reponse, le premier joueur donne un indice qui indique le nombre de couleurs correctes ainsi que leurs ordres "<<std::endl;
         std::cout<<"Vous pouvez choisir le nombre de manches a jouer, ainsi que la difficulte "<<std::endl;
-        std::cout<<"Facile -> 2 couleurs "<<std::endl;
-        std::cout<<"Moyen -> 3 couleurs "<<std::endl;
-        std::cout<<"Difficle -> 4 couleurs "<<std::endl;
         std::cout<<"Les couleurs disponibles sont : "<<std::endl;
         std::cout<<"Rouge(R) , Bleu(B), Jaune(J), Violet(V), Marron(M), Orange(O) "<<std::endl;
         std::cout<<"Si la manche se termine avant que le code ne soit devine, le premier joueur gagne, dans le cas contraire, le deuxieme joueur emporte la manche "<<std::endl<<std::endl;
@@ -37,7 +34,6 @@ void init_jeu(int &nb_tentatives, int &nb_couleurs, int &nb_manches)
     else if(difficulte=='d')
         nb_tentatives=6;
     std::cout<<"Vous avez donc "<<nb_tentatives<<" tentatives pour trouver la reponse !  "<<std::endl;
-    std::cout<<"Vous allez jouer avec les 4 couleurs suivante : Rouge(R) , Bleu(B) , Jaune(J) , Violet(V) "<<std::endl;
     std::cout<<std::endl;
     std::cout<<"Nombre de manches ? "; std::cin>>nb_manches; std::cout<<std::endl;
     std::cout<<"Que le jeu commence ! " ; std::cout<<std::endl<<std::endl;
