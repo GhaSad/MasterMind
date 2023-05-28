@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <array>
-#include <cstdlib>
 #include <ctime>
 
 
@@ -12,14 +11,11 @@ void init_jeu(std::string &j1, int &nb_manches, int &nb_couleurs,int &nb_tentati
     std::cout<<" Voulez-vous une explication du deroulement du jeu ? (o/n)"; std::cin>>rep;std::cout<<std::endl;
     if(rep=='o')
     {
-        std::cout<<"Le jeu se deroule le joueur et l'ordinateur : "<<std::endl;
+        std::cout<<"Le jeu se deroule entre le joueur et l'ordinateur : "<<std::endl;
         std::cout<<"L'ordinateur genere le code couleur secret "<<std::endl;
         std::cout<<"Et le joueur a un nombre de tentatives choisis pour deviner l'ordre des couleurs "<<std::endl;
         std::cout<<"Apres la saisie de la reponse, un indice donne indique le nombre de couleurs correctes ainsi que leurs ordres "<<std::endl;
-        std::cout<<"Vous pouvez choisir le nombre de manches a jouer, ainsi que la difficulte "<<std::endl;
-        std::cout<<"Facile -> 2 couleurs "<<std::endl;
-        std::cout<<"Moyen -> 3 couleurs "<<std::endl;
-        std::cout<<"Difficle -> 4 couleurs "<<std::endl;
+        std::cout<<"Vous pouvez choisir le nombre de manches a jouer "<<std::endl;
         std::cout<<"Les couleurs disponibles sont : "<<std::endl;
         std::cout<<"Rouge(R) , Bleu(B), Jaune(J), Violet(V), Marron(M), Orange(O) "<<std::endl;
         std::cout<<"Si la manche se termine avant que le code ne soit devine, le joueur perd la manche "<<std::endl<<std::endl;
@@ -39,7 +35,6 @@ void init_jeu(std::string &j1, int &nb_manches, int &nb_couleurs,int &nb_tentati
     else if(difficulte=='d')
         nb_tentatives=6;
     std::cout<<"Vous avez "<<nb_tentatives<<" tentatives pour trouver la reponse ! "<<std::endl;
-    std::cout<<"Vous allez jouer avec les 4 couleurs suivante : Rouge(R) , Bleu(B) , Jaune(J) , Violet(V) "<<std::endl;
     std::cout<<"Que le jeu commence ! " ; std::cout<<std::endl<<std::endl;
 }
 
@@ -53,27 +48,11 @@ void genere_code(std::string &code, int nb_couleurs)
         int index = std::rand() % nb_couleurs;
         code += couleurs[index];
     }
-    std::cout<<"Le code est : "<<code<<std::endl;
 }
 
 bool verif1(std::string reponse, std::string code)
 {
-    if(reponse.length()!=code.length())
-        return false;
-    else if(reponse==code)
-        return true;
-    else return false;
-}
-
-int occurence_couleur(char couleur, std::string suite_couleurs)
-{
-    int compteur=0;
-    for(int i=0 ; i<suite_couleurs.length(); ++i)
-    {
-        if(suite_couleurs[i]==couleur)
-            compteur++;
-    }
-    return compteur;
+    return(reponse==code);
 }
 
 void indice(const std::string& tentative, const std::string& secret)
@@ -87,7 +66,8 @@ void indice(const std::string& tentative, const std::string& secret)
     
     // Comptage des couleurs dans le bon ordre
     for (int i = 0; i < 4; ++i) {
-        if (tentative[i] == secret[i]) {
+        if (tentative[i] == secret[i]) 
+        {
             bon_ordre++;
             trouve_secret[i] = true;
             trouve_tentative[i] = true;

@@ -25,7 +25,7 @@ int main()
         init_jeu(nb_tentatives,nb_couleurs,nb_manches);
         std::string j1, j2;
         saisie_joueurs(j1,j2);
-        std::string code; int tour=0;
+        std::string code; 
         int manche=0;
         while(manche < nb_manches)
         {
@@ -70,9 +70,7 @@ int main()
     {
         int tour = 1;
         bool gagne = false;
-
-        std::cout<<"Saisissez le code : "<<std::endl;
-        code=saisie_code();
+        debut_jeu();
         tentative = {1, 1, 2, 2}; 
 
         //Création des 1296 combinaisons possibles
@@ -97,12 +95,13 @@ int main()
             std::cout << "Tour : " << tour << std::endl;
             std::cout << "Tentative : ";
             intTostring(tentative);
-            std::cout << " = " << indice << std::endl;
+            std::cout << " = " << indice3 << std::endl;
 
             //Si l'indice c'est 4 pions noirs, alors le jeu est fini
-            if (indice3 == "BBBB") {
+            if (indice3 == "BBBB") 
+            {
                 gagne = true;
-                std::cout << "L'ordinateur a trouve la combinaison !" << std::endl;
+                std::cout << "L'ordinateur a trouve la combinaison ! " ; intTostring(tentative) ; std::cout<< std::endl;
                 break;
             }
 

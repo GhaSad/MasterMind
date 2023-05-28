@@ -17,18 +17,21 @@ std::vector<std::vector<int>> tentativeSuivantes;
 
 int chartoint(char lettre)
 {
+    int chiffre;
         if(lettre=='R')
-            return 1;
+            chiffre = 1;
         else if(lettre=='B')
-            return 2;
+            chiffre = 2;
         else if(lettre=='J')
-            return 3;
+            chiffre = 3;
         else if(lettre=='V')
-            return 4;
+            chiffre = 4;
         else if(lettre=='M')
-            return  5;
+            chiffre = 5;
         else if(lettre=='O')
-            return 6;
+            chiffre = 6;
+
+    return chiffre;
 }
 
 std::vector<int> saisie_code()  
@@ -79,22 +82,20 @@ void intTostring(std::vector<int> code)
 
 void genere_combinaisons(std::vector<std::vector<int>>& combinaisons)
 {
-    const int MIN = 1;
-    const int MAX = 6; 
+    int totalCombi = pow(NB_COULEURS, TAILLE_CODE);  // Calcul du nombre total de combinaisons
     
-    int totalCombi = pow(MAX, TAILLE_CODE);  // Calcul du nombre total de combinaisons
-    
-    for (int i = 0; i < totalCombi; i++) {
+    for (int i = 0; i < totalCombi; i++) 
+    {
         std::vector<int> combi;
         int num = i;
         
         // Parcours des chiffres de la combinaison
-        for (int j = MIN; j <= TAILLE_CODE; j++) {
-            int digit = num % MAX  + MIN;
+        for (int j = 0; j < TAILLE_CODE; j++) 
+        {
+            int digit = num % NB_COULEURS  + 1;
             combi.push_back(digit);
-            num /= MAX;
+            num /= NB_COULEURS;
         }
-        
         combinaisons.push_back(combi);
     }
 }
@@ -108,7 +109,8 @@ std::string indication(std::vector<int> tentative, std::vector<int> code)
     
     // Comptage des couleurs dans le bon ordre
     for (int i = 0; i < 4; ++i) {
-        if (tentative[i] == code[i]) {
+        if (tentative[i] == code[i]) 
+        {
             bon_ordre++;
             trouve_code[i] = true;
             trouve_tentative[i] = true;
@@ -119,7 +121,8 @@ std::string indication(std::vector<int> tentative, std::vector<int> code)
     for (int i = 0; i < 4; ++i) {
         if (!trouve_tentative[i]) {
             for (int j = 0; j < 4; ++j) {
-                if (!trouve_code[j] and tentative[i] == code[j]) {
+                if (!trouve_code[j] and tentative[i] == code[j]) 
+                {
                     mauvais_ordre++;
                     trouve_code[j] = true;
                     break;
@@ -211,10 +214,10 @@ std::vector<std::vector<int>> minmax()
     std::vector<std::vector<int>> essaiSuivants;
     int max, min;
 
-    for (int i = 0; i < combinaisons.size(); ++i) 
+    for (unsigned int i = 0; i < combinaisons.size(); ++i) 
     {
 
-        for (int j = 0; j < solutionsProbables.size(); ++j) // ici on cherche l'indice avec la plus grande occurrence
+        for (unsigned int j = 0; j < solutionsProbables.size(); ++j) // ici on cherche l'indice avec la plus grande occurrence
         {                  // et donc c'est comme si on cherchait l'indice avec le plus de chance d'etre trouvé pour cette tentative
 
             std::string pegScore = indication(combinaisons[i], solutionsProbables[j]);
@@ -244,10 +247,10 @@ std::vector<std::vector<int>> minmax()
 std::vector<int> tentativeSuivante(std::vector<std::vector<int>> tentativeSuivantes) 
 {
     std::vector<int> suivant;
-    for (int i = 0; i < tentativeSuivantes.size(); ++i) 
+    for (unsigned int i = 0; i < tentativeSuivantes.size(); ++i) 
     {
         bool found = false;
-        for (int j = 0; j < solutionsProbables.size(); ++j) 
+        for (unsigned int j = 0; j < solutionsProbables.size(); ++j) 
         {
             if (solutionsProbables[j] == tentativeSuivantes[i]) 
             {
@@ -264,10 +267,10 @@ std::vector<int> tentativeSuivante(std::vector<std::vector<int>> tentativeSuivan
 
     if (suivant.empty()) 
     {
-        for (int i = 0; i < tentativeSuivantes.size(); ++i)
+        for (unsigned int i = 0; i < tentativeSuivantes.size(); ++i)
         {
             bool found = false;
-            for (int j = 0; j < combinaisons.size(); ++j) 
+            for (unsigned int j = 0; j < combinaisons.size(); ++j) 
             {
                 if (combinaisons[j] == tentativeSuivantes[i]) 
                 {
@@ -284,18 +287,4 @@ std::vector<int> tentativeSuivante(std::vector<std::vector<int>> tentativeSuivan
     }
     return suivant;
 }
-
-
-
-// L'expression find(solutionsProbables.begin(), solutionsProbables.end(), tentativeSuivantes[i]) != solutionsProbables.end() est une comparaison utilisée pour vérifier si l'élément tentativeSuivantes[i] se trouve dans le vecteur solutionsProbables.
-
-// La fonction find est une fonction de la bibliothèque <algorithm> en C++. Elle prend en paramètres un itérateur de début (solutionsProbables.begin()) et un itérateur de fin (solutionsProbables.end()) définissant la plage de recherche, ainsi que la valeur que l'on souhaite trouver (tentativeSuivantes[i]).
-
-// Si l'élément tentativeSuivantes[i] est trouvé dans le vecteur solutionsProbables, la fonction find renverra un itérateur pointant vers cet élément. Dans ce cas, la condition != solutionsProbables.end() sera évaluée à true, indiquant que l'élément a été trouvé.
-
-// En revanche, si l'élément tentativeSuivantes[i] n'est pas présent dans le vecteur solutionsProbables, la fonction find renverra l'itérateur de fin solutionsProbables.end(). Dans ce cas, la condition != solutionsProbables.end() sera évaluée à false, indiquant que l'élément n'a pas été trouvé.
-
-// Ainsi, cette expression permet de vérifier si un élément spécifique est présent dans le vecteur solutionsProbables en effectuant une recherche linéaire.
-
-
 
